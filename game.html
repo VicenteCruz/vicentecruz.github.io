@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presente de aniversário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #333;
+        }
+        #word {
+            font-size: 36px;
+            letter-spacing: 5px;
+            margin: 20px 0;
+            padding: 10px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            background-color: #ffffff;
+            width: fit-content;
+        }
+        #letterInput {
+            font-size: 24px;
+            padding: 10px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        button {
+            font-size: 24px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #000000; /* Cor para mensagens de erro */
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo do Forcado</h1>
+    <div id="word"></div>
+    <div>
+        <input type="text" id="letterInput" maxlength="1" placeholder="Proponha uma letra" />
+        <button onclick="guessLetter()">Adivinhar</button>
+    </div>
+    <div id="message"></div>
+    <div id="revealButton" style="display: none;">
+        <button onclick="revealGift()">Abre o presente!</button>
+    </div>
+    <div id="giftImage" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 999;">
+        <img src="C:\Users\vicen\Pictures\Screenshots\Screenshot 2024-10-25 155754.png" alt="Seu Presente" style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+
+    <script>
+        //const phrase = "Prepara-te para viajar"; // A primeira letra é maiúscula
+        const phrase = "r";
+        let displayedWord = phrase.replace(/[a-zA-Z]/g, "_");
+        const wordElement = document.getElementById("word");
+        const messageElement = document.getElementById("message");
+
+        function updateDisplay() {
+            // Substitui espaços por um número maior de espaços para aumentar o espaçamento entre palavras
+            wordElement.innerHTML = displayedWord.split("").map(char => char === " " ? "&nbsp;&nbsp;&nbsp;&nbsp;" : char).join(" ");
+        }
+
+        function guessLetter() {
+            const input = document.getElementById("letterInput");
+            const letter = input.value.toLowerCase();
+            input.value = "";
+
+            if (letter.length === 1) {
+                let found = false;
+                let newDisplayedWord = "";
+
+                for (let i = 0; i < phrase.length; i++) {
+                    if (phrase[i].toLowerCase() === letter) {
+                        newDisplayedWord += phrase[i]; // Mantém a letra original (maiúscula ou minúscula)
+                        found = true;
+                    } else if (phrase[i] === " ") {
+                        newDisplayedWord += " "; // Mantém os espaços
+                    } else {
+                        newDisplayedWord += displayedWord[i]; // Mantém a letra já adivinhada
+                    }
+                }
+
+                displayedWord = newDisplayedWord;
+                messageElement.textContent = found ? "Continua!" : "Obvio que não é a boa letra.";
+            } else {
+                messageElement.textContent = "Lol, isso não é uma letra.";
+            }
+
+            updateDisplay();
+
+            if (!displayedWord.includes("_")) {
+            messageElement.textContent = "Parabéns! Adivinhaste a frase!";
+            document.getElementById("revealButton").style.display = "block"; // Mostra o botão
+        }
+    }
+
+    function revealGift() {
+        //alert("Aqui está o seu presente! 🎁"); // Ação ao clicar no botão
+        document.getElementById("giftImage").style.display = "block"; // Mostra a imagem
+    }
+
+        updateDisplay();
+    </script>
+</body>
+</html>
