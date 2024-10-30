@@ -27,7 +27,7 @@
             border: 2px solid #78bb7a;
             border-radius: 10px;
             background-color: #ffffff;
-            width: fit-content;
+            text-align: center; /* Center the text */
             white-space: pre-wrap; /* Allow wrapping of words */
         }
         #letterInput {
@@ -121,7 +121,7 @@
 
     <script>
         //const phrase = "Prepara-te para viajar"; // A primeira letra é maiúscula
-        const phrase = "Prepara-te para viajar";
+        const phrase = "Prepara-te \n para viajar";
         let displayedWord = phrase.replace(/[a-zA-Z]/g, "_");
         const wordElement = document.getElementById("word");
         const messageElement = document.getElementById("message");
