@@ -6,7 +6,7 @@
     <title>Presente de aniversário Mafalda '24</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background-color: #f0f8ff; /* Azul claro */
             color: #333;
             display: flex;
@@ -71,12 +71,15 @@
 
     <script>
         const colors = ['#B2E0B2', '#C2F0C2', '#D2F7D2', '#E2FFE2', '#A2D8A2']; // Tonalidades de verde clarinhas
+        const initialColors = ['#FFFACD', '#FFEFD5', '#FFD700', '#FFE4B5', '#FFFFE0']; // Tonalidades de amarelo
         const ballCount = 20; // Número total de bolas
 
-        function createBall() {
+        function createBall(isInitial = false) {
             const ball = document.createElement('div');
             ball.className = 'ball';
-            ball.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            ball.style.backgroundColor = isInitial 
+                ? initialColors[Math.floor(Math.random() * initialColors.length)] 
+                : colors[Math.floor(Math.random() * colors.length)];
             ball.style.left = Math.random() * 100 + 'vw'; // Posição aleatória na largura da tela
             ball.style.animationDuration = (Math.random() * 3 + 2) + 's'; // Duração aleatória entre 2s e 5s
             document.body.appendChild(ball);
@@ -88,7 +91,12 @@
         }
 
         // Cria bolas em intervalos aleatórios
-        setInterval(createBall, 300); // Cria uma bola a cada 300ms
+        setInterval(() => createBall(), 300); // Cria uma bola a cada 300ms
+
+        // Cria bolas iniciais
+        for (let i = 0; i < 50; i++) { // Cria 10 bolas inicialmente
+            createBall(true); // Passa true para criar bolas amarelas
+        }
     </script>
 </body>
 </html>
