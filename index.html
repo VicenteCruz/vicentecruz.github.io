@@ -16,17 +16,20 @@
             height: 100vh;
             margin: 0;
             text-align: center;
+            overflow: hidden; /* Impede a barra de rolagem */
         }
 
         h1 {
             font-size: 3em;
             margin-bottom: 20px;
-            color: #72bb74; /* Verde */
+            color: #000000; /* Verde */
+            z-index: 1; /* Coloca o texto acima das bolas */
         }
 
         p {
             font-size: 1.5em;
             margin-top: 10px;
+            z-index: 1; /* Coloca o texto acima das bolas */
         }
 
         a {
@@ -36,15 +39,56 @@
             padding: 10px 20px;
             border-radius: 5px;
             transition: background-color 0.3s;
+            z-index: 1; /* Coloca o texto acima das bolas */
         }
 
         a:hover {
             background-color: #45a049; /* Verde mais escuro ao passar o mouse */
+        }
+
+        .ball {
+            position: absolute;
+            bottom: -100px; /* Começa fora da tela */
+            width: 50px;
+            height: 50px; /* Tamanho da bola */
+            border-radius: 50%; /* Forma de bola */
+            animation: rise linear infinite; /* Animação de subida */
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-110vh); /* Sobe até 10% acima da altura da tela */
+            }
         }
     </style>
 </head>
 <body>
     <h1>Bem-vinda, Mafalda!</h1>
     <p><a href="game.html">Descobre a tua surpresa</a></p>
+
+    <script>
+        const colors = ['#B2E0B2', '#C2F0C2', '#D2F7D2', '#E2FFE2', '#A2D8A2']; // Tonalidades de verde clarinhas
+        const ballCount = 20; // Número total de bolas
+
+        function createBall() {
+            const ball = document.createElement('div');
+            ball.className = 'ball';
+            ball.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            ball.style.left = Math.random() * 100 + 'vw'; // Posição aleatória na largura da tela
+            ball.style.animationDuration = (Math.random() * 3 + 2) + 's'; // Duração aleatória entre 2s e 5s
+            document.body.appendChild(ball);
+
+            // Remove a bola após a animação
+            ball.addEventListener('animationend', () => {
+                ball.remove(); // Remove a bola após a animação
+            });
+        }
+
+        // Cria bolas em intervalos aleatórios
+        setInterval(createBall, 300); // Cria uma bola a cada 300ms
+    </script>
 </body>
 </html>

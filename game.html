@@ -26,7 +26,10 @@
             border: 2px solid #78bb7a;
             border-radius: 10px;
             background-color: #ffffff;
-            width: fit-content;
+            width: auto; /* Permite que o contêiner se ajuste ao conteúdo */
+            white-space: nowrap; /* Impede a quebra de linha */
+            overflow: hidden; /* Oculta o excesso de texto */
+            text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
         }
         #letterInput {
             font-size: 24px;
@@ -58,6 +61,7 @@
         @media (max-width: 600px) {
             #word {
                 font-size: 28px; /* Tamanho da fonte menor em dispositivos móveis */
+                white-space: normal; /* Permite que as palavras quebrem em várias linhas */
             }
             #letterInput {
                 font-size: 20px; /* Tamanho da fonte menor em dispositivos móveis */
@@ -89,14 +93,12 @@
     </div>
 
     <script>
-        //const phrase = "Prepara-te para viajar"; // A primeira letra é maiúscula
         const phrase = "Prepara-te para viajar";
         let displayedWord = phrase.replace(/[a-zA-Z]/g, "_");
         const wordElement = document.getElementById("word");
         const messageElement = document.getElementById("message");
 
         function updateDisplay() {
-            // Substitui espaços por um número maior de espaços para aumentar o espaçamento entre palavras
             wordElement.innerHTML = displayedWord.split("").map(char => char === " " ? "&nbsp;&nbsp;&nbsp;&nbsp;" : char).join(" ");
         }
 
@@ -129,21 +131,20 @@
             updateDisplay();
 
             if (!displayedWord.includes("_")) {
-            messageElement.textContent = "Parabéns! Adivinhaste a frase!";
-            document.getElementById("revealButton").style.display = "block"; // Mostra o botão
+                messageElement.textContent = "Parabéns! Adivinhaste a frase!";
+                document.getElementById("revealButton").style.display = "block"; // Mostra o botão
+            }
         }
-    }
 
-    function revealGift() {
-        //alert("Aqui está o seu presente! 🎁"); // Ação ao clicar no botão
-        document.getElementById("giftImage").style.display = "block"; // Mostra a imagem
-    }
-
-    function checkEnter(event) {
-        if (event.key === "Enter") {
-            guessLetter(); // Chama a função guessLetter quando a tecla Enter é pressionada
+        function revealGift() {
+            document.getElementById("giftImage").style.display = "block"; // Mostra a imagem
         }
-    }
+
+        function checkEnter(event) {
+            if (event.key === "Enter") {
+                guessLetter(); // Chama a função guessLetter quando a tecla Enter é pressionada
+            }
+        }
 
         updateDisplay();
     </script>
