@@ -403,8 +403,8 @@
             audioElement.pause();
         });
         
-        //const phrase = "A próxima viagem";
-        const phrase = "";
+        const phrase = "A próxima viagem";
+        //const phrase = "";
         
         
         let displayedWord = phrase.replace(/[a-zA-Záéíóúãõâêîôûàèìòùäëïöüçñ]/gi, "_");
@@ -478,7 +478,7 @@
                 setTimeout(() => {
                     document.getElementById("giftImage").style.display = "block";
                     document.body.classList.add("blur-background");
-                }, 600);
+                }, 0);
             } else {
                 // On desktop, show the image immediately
                 document.getElementById("giftImage").style.display = "block";
