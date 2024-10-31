@@ -6,7 +6,7 @@
     <title>Presente de aniversário</title>
     <style>
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Gill Sans', Arial, sans-serif;
             background-color: #f0f8ff;
             display: flex;
             flex-direction: column;
@@ -30,19 +30,22 @@
             text-align: center; /* Center the text */
             white-space: pre-wrap; /* Allow wrapping of words */
             -webkit-animation: squareToCircle 2s 1s infinite alternate;
+            
         }
+        
         #letterInput {
             font-size: 24px;
             padding: 10px;
             border: 2px solid #78bb7a;
-            border-radius: 5px;
+            border-radius: 30px;
             margin-right: 10px;
         }
+
         button {
             font-size: 24px;
             padding: 10px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 30px;
             background-color: #78bb7a;
             color: white;
             cursor: pointer;
@@ -51,6 +54,17 @@
         button:hover {
             background-color: #45a049;
         }
+
+        .btnR{
+            background-color: #00000000;
+            color: #333;
+        }
+
+        .btnR:hover{
+            background-color: #00000000;
+            color: #333;
+        }
+
         #message {
             margin-top: 20px;
             font-size: 20px;
@@ -81,23 +95,6 @@
             100% { background-color: #78bb7a; }
         }
 
-        #revealButton {
-            display: none; /* Initially hidden */
-            transition: opacity 0.5s ease; /* Transition for opacity */
-            opacity: 0; /* Start with opacity 0 */
-            padding: 10px 20px; /* Add padding for better appearance */
-            border-radius: 5px; /* Rounded corners */
-            color: white; /* Text color */
-            font-size: 24px; /* Font size */
-            cursor: pointer; /* Pointer cursor on hover */
-            animation: colorChange 1s infinite; /* Color change animation */
-        }
-
-        #revealButton.visible {
-            display: block; /* Show the button */
-            opacity: 1; /* Fade in */
-        }
-
         @keyframes backgroundChange {
             0% { background-color: #ffedd7; } /* Azul claro */
             50% { background-color: #ffebcd; } /* Cor de fundo intermediária */
@@ -120,7 +117,114 @@
     100% {
       border-radius: 30px 20px 20px 30px;
     }
+
 }
+
+
+
+#revealButton {
+    padding: 1px 1px; /* Ajuste o valor conforme necessário */
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    color: rgb(0, 0, 0);
+    background: #99f19c;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin-right: 10px;
+}
+
+#revealButton:before {
+    content: "";
+    background: linear-gradient(
+        45deg,
+        #44ff00,
+        #b3ff50,
+        #e9fe6f,
+        #f3ff94,
+        #b3f069,
+        #72ed46,
+        #b1fc24,
+        #dcff18,
+        #44ff00
+    );
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -43%); /* Centers the glow */
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(15px); /* Increase blur for a stronger glow */
+    width: calc(100% + 15px); /* Larger glow area */
+    height: calc(100% + 15px); /* Larger glow area */
+    animation: glowing-button-85 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 30px;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+#revealButton:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border: 2px solid #ffffff;
+  left: 0;
+  top: 0;
+  border-radius: 30px;
+}
+
+#revealButton:hover {
+    background-color: #78bb7a; /* Cor de fundo ao passar o cursor */
+    color: #ffffff; /* Cor do texto ao passar o cursor */
+}
+
+#revealButton:hover:before {
+    background: linear-gradient(    
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000); /* Alteração de cor no hover */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -43%); /* Centers the glow */
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(15px); /* Increase blur for a stronger glow */
+    width: calc(100% + 15px); /* Larger glow area */
+    height: calc(100% + 15px); /* Larger glow area */
+    animation: glowing-button-85 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 30px;
+}
+
+
+
+
     </style>
 </head>
 <body>
@@ -128,11 +232,11 @@
     <div id="word"></div>
     <div>
         <input type="text" id="letterInput" maxlength="1" placeholder="Escreve aqui uma letra" onkeypress="checkEnter(event)" />
-        <button onclick="guessLetter()">??</button>
+        <button id="guessButton" onclick="guessLetter()">??</button>
     </div>
     <div id="message"></div>
     <div id="revealButton" style="display: none;">
-        <button onclick="revealGift()">Parabéns, agora só falta abrir o presente!</button>
+        <button class="btnR" onclick="revealGift()">Agora só falta abrir o presente!</button>
     </div>
     <div id="giftImage" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 999; background-color: rgba(0, 0, 0, 0.8);">
         <img src="Lisboa.png" alt="Seu Presente" style="max-width: 100%; max-height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" />
@@ -140,7 +244,8 @@
 
     <script>
         //const phrase = "Prepara-te para viajar"; // A primeira letra é maiúscula
-        const phrase = "Prepara-te\npara viajar";
+        //const phrase = "Prepara-te\npara viajar";
+        const phrase = "r";
         let displayedWord = phrase.replace(/[a-zA-Z]/g, "_");
         const wordElement = document.getElementById("word");
         const messageElement = document.getElementById("message");
@@ -183,6 +288,8 @@
                 const revealButton = document.getElementById("revealButton");
                 revealButton.style.display = "block"; // Ensure the button is set to block before fading in
                 revealButton.classList.add("visible"); // Add the visible class to trigger the fade effect
+                input.style.display = "none";
+                guessButton.style.display = "none";
             }
         }
 
@@ -201,3 +308,4 @@
     </script>
 </body>
 </html>
+
