@@ -246,7 +246,7 @@
             height: 100%;
             z-index: 999;
             background-color: rgba(0, 0, 0, 0);
-            animation: fadeInZoom 2s ease forwards;
+            animation: fadeInZoom 1s ease forwards;
         }
         
         #popup-content {
@@ -258,7 +258,7 @@
             position: relative; /* Added this */
             top: 50%;
             left: 50%;
-            animation: popupAppear 0.5s ease forwards;
+            animation: popupAppear 0s ease forwards;
         }
         
         #popup-content img {
@@ -268,7 +268,7 @@
             max-height: 100%;
             border-radius: 30px;
             position: absolute;
-            animation: popupAppear 0.5s ease forwards;
+            animation: popupAppear 0s ease forwards;
         }
         
         #popup-content:before {
@@ -305,8 +305,6 @@
             }
         }
         
-        
-        
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -314,7 +312,7 @@
         
         @keyframes popupAppear {
             from { 
-                transform: translate(-50%, -50%) scale(0.8);
+                transform: translate(-50%, -50%) scale(0);
                 opacity: 0;
             }
             to { 
@@ -405,8 +403,8 @@
             audioElement.pause();
         });
         
-        const phrase = "A próxima viagem";
-        //const phrase = "";
+        //const phrase = "A próxima viagem";
+        const phrase = "";
         
         
         let displayedWord = phrase.replace(/[a-zA-Záéíóúãõâêîôûàèìòùäëïöüçñ]/gi, "_");
