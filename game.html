@@ -283,55 +283,68 @@
     </div>
 
     <script>
+
         //const phrase = "Prepara-te para viajar"; // A primeira letra é maiúscula
-        const phrase = "Prepara-te\npara viajar";
+        const phrase = "A próxima viagem";
         //const phrase = "r";
-        let displayedWord = phrase.replace(/[a-zA-Z]/g, "_");
+        let displayedWord = phrase.replace(/[a-zA-Záéíóúãõâêîôûàèìòùäëïöüçñ]/gi, "_");
         const wordElement = document.getElementById("word");
         const messageElement = document.getElementById("message");
 
         function updateDisplay() {
             // Substitui espaços por um número maior de espaços para aumentar o espaçamento entre palavras
-            wordElement.innerHTML = displayedWord.split("").map(char => char === " " ? "&nbsp;&nbsp;&nbsp;&nbsp;" : char).join(" ");
+            wordElement.innerHTML = displayedWord.split("").map(char => char === " " ? "&nbsp;&nbsp;&nbsp;&nbsp;" : char).join("");
         }
 
         function guessLetter() {
-            const input = document.getElementById("letterInput");
-            const letter = input.value.toLowerCase();
-            input.value = "";
+    const input = document.getElementById("letterInput");
+    let letter = input.value.toLowerCase();
+    input.value = "";
 
-            if (letter.length === 1) {
-                let found = false;
-                let newDisplayedWord = "";
+    // Substitui "ó" por "o" para fazer a verificação
+    if (letter === "o" || letter === "ó") {
+        letter = "o";
+    }
 
-                for (let i = 0; i < phrase.length; i++) {
-                    if (phrase[i].toLowerCase() === letter) {
-                        newDisplayedWord += phrase[i]; // Mantém a letra original (maiúscula ou minúscula)
-                        found = true;
-                    } else if (phrase[i] === " ") {
-                        newDisplayedWord += " "; // Mantém os espaços
-                    } else {
-                        newDisplayedWord += displayedWord[i]; // Mantém a letra já adivinhada
-                    }
-                }
+    if (letter.length === 1) {
+        let found = false;
+        let newDisplayedWord = "";
 
-                displayedWord = newDisplayedWord;
-                messageElement.textContent = found ? "Continua!" : "Obvio que não é a boa letra.";
+        for (let i = 0; i < phrase.length; i++) {
+            // Aqui consideramos "ó" como "o"
+            const phraseLetter = phrase[i].toLowerCase() === "ó" ? "o" : phrase[i].toLowerCase();
+
+            if (phraseLetter === letter) {
+                newDisplayedWord += phrase[i]; // Mantém a letra original (maiúscula ou minúscula)
+                found = true;
+            } else if (phrase[i] === " ") {
+                newDisplayedWord += " "; // Mantém os espaços
             } else {
-                messageElement.textContent = "Lol, isso não é uma letra.";
-            }
-
-            updateDisplay();
-
-            if (!displayedWord.includes("_")) {
-                messageElement.textContent = " ";
-                const revealButton = document.getElementById("revealButton");
-                revealButton.style.display = "block"; // Ensure the button is set to block before fading in
-                revealButton.classList.add("visible"); // Add the visible class to trigger the fade effect
-                input.style.display = "none";
-                guessButton.style.display = "none";
+                newDisplayedWord += displayedWord[i]; // Mantém a letra já adivinhada
             }
         }
+
+        displayedWord = newDisplayedWord;
+        messageElement.textContent = found ? "Continua!" : "Obvio que não é a boa letra.";
+    } else {
+        messageElement.textContent = "Lol, isso não é uma letra.";
+    }
+
+    updateDisplay();
+
+    if (!displayedWord.includes("_")) {
+        messageElement.textContent = " ";
+        const revealButton = document.getElementById("revealButton");
+        const backgroundMusic = document.getElementById("backgroundMusic");
+
+        revealButton.style.display = "block"; // Ensure the button is set to block before fading in
+        backgroundMusic.currentTime = 178; // Substitua 30 pelo timestamp desejado em segundos
+        backgroundMusic.play();
+        revealButton.classList.add("visible"); // Add the visible class to trigger the fade effect
+        input.style.display = "none";
+        guessButton.style.display = "none";
+    }
+}
 
         function revealGift() {
             //alert("Aqui está o seu presente! 🎁"); // Ação ao clicar no botão
@@ -349,6 +362,7 @@
 
         updateDisplay();
     </script>
+<audio id="backgroundMusic" src="proxima_viagem.mp3" preload="auto"></audio>
 </body>
 </html>
 
