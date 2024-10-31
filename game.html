@@ -40,7 +40,7 @@
             border-radius: 30px;
             margin-right: 10px;
         }
-
+        
         button {
             font-size: 24px;
             padding: 10px 20px;
@@ -56,25 +56,25 @@
             background-color: #45a049;
             border: 2px solid #45a049;
         }
-
+        
         .btnR{
             background-color: #00000000;
             border: 2px solid #00000000;
             color: #333;
         }
-
+        
         .btnR:hover{
             background-color: #00000000;
             border: 2px solid #00000000;
             color: #333;
         }
-
+        
         #message {
             margin-top: 0px;
             font-size: 20px;
             color: #464646; /* Cor para mensagens de erro */
         }
-
+        
         /* Adicionando estilos responsivos */
         @media (max-width: 600px) {
             h1 {
@@ -84,229 +84,291 @@
                 font-size: 24px; /* Tamanho da fonte menor em dispositivos móveis */
                 padding: 10px 20px;
             }
-
+            
             #message {
                 font-size: 17px; /* Tamanho da fonte menor em dispositivos móveis */
             }
-
+            
             #letterInput {
-            font-size: 22px; /* Larger font size for mobile */
-            padding: 10px; /* Increase padding */
-            width: 70%; /* Wider input field */
-                }
-                button {
-                    font-size: 22px; /* Increase font size */
-                    padding: 15px 15px; /* Increase padding for easier tapping */
-                }
-                #revealButton {
-                    font-size: 22px; /* Larger font for the reveal button */
-                    padding: 15px 25px;
-                }
+                font-size: 22px; /* Larger font size for mobile */
+                padding: 10px; /* Increase padding */
+                width: 70%; /* Wider input field */
+            }
+            button {
+                font-size: 22px; /* Increase font size */
+                padding: 15px 15px; /* Increase padding for easier tapping */
+            }
+            #revealButton {
+                font-size: 22px; /* Larger font for the reveal button */
+                padding: 15px 25px;
+            }
         }
-
+        
+        
+        @-webkit-keyframes squareToCircle {
+            0% {
+                border-radius: 30px 20px 20px 30px;
+            }
+            25% {
+                border-radius: 30px 20px 30px 20px;
+            }
+            50% {
+                border-radius: 20px 30px 30px 20px;
+            }
+            75% {
+                border-radius: 20px 20px 30px 30px;
+            }
+            100% {
+                border-radius: 30px 20px 20px 30px;
+            }
+            
+        }
+        
+        
+        
+        #revealButton {
+            padding: 1px 1px; /* Ajuste o valor conforme necessário */
+            border: none;
+            border-radius: 30px;
+            outline: none;
+            color: rgb(0, 0, 0);
+            background: #ffffff00;
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            
+        }
+        
+        #revealButton:before {
+            content: "";
+            background: linear-gradient(
+            45deg,
+            #60dd66,
+            #57c75c,
+            #67eb6e,
+            #a7eb67,
+            #deeb67,
+            #9ceb67,
+            #7cbc51,
+            #55bc51,
+            #60dd66
+            );
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -43%); /* Centers the glow */
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(15px); /* Increase blur for a stronger glow */
+            width: calc(100% + 15px); /* Larger glow area */
+            height: calc(100% + 15px); /* Larger glow area */
+            animation: glowing-button-85 20s linear infinite;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 30px;
+        }
+        
+        
+        #revealButton:after {
+            z-index: -1;
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            border: 2px solid #ffffff;
+            left: 0;
+            top: 0;
+            border-radius: 30px;
+        }
+        @media (max-width: 600px) {
+            #revealButton.clicked:before {
+                background: linear-gradient(    
+                45deg,
+                #ff0000,
+                #ff7300,
+                #fffb00,
+                #48ff00,
+                #00ffd5,
+                #002bff,
+                #7a00ff,
+                #ff00c8,
+                #ff0000); /* Alteração de cor no hover */
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -43%); /* Centers the glow */
+                background-size: 400%;
+                z-index: -1;
+                filter: blur(15px); /* Increase blur for a stronger glow */
+                width: calc(100% + 15px); /* Larger glow area */
+                height: calc(100% + 15px); /* Larger glow area */
+                animation: glowing-button-85 20s linear infinite;
+                transition: opacity 0.3s ease-in-out;
+                border-radius: 30px;
+            }
+        }
+        
+        #revealButton:hover:before {
+            background: linear-gradient(    
+            45deg,
+            #ff0000,
+            #ff7300,
+            #fffb00,
+            #48ff00,
+            #00ffd5,
+            #002bff,
+            #7a00ff,
+            #ff00c8,
+            #ff0000); /* Alteração de cor no hover */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -43%); /* Centers the glow */
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(15px); /* Increase blur for a stronger glow */
+            width: calc(100% + 15px); /* Larger glow area */
+            height: calc(100% + 15px); /* Larger glow area */
+            animation: glowing-button-85 20s linear infinite;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 30px;
+        }
+        
+        #giftImage {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            background-color: rgba(0, 0, 0, 0);
+            animation: fadeInZoom 2s ease forwards;
+        }
+        
+        #popup-content {
+            background: rgba(255, 255, 255, 0);
+            padding: 40px;
+            width: 35%; /* Relative width for responsiveness */
+            aspect-ratio: 1 / 1;
+            border-radius: 30px;
+            position: relative; /* Added this */
+            top: 50%;
+            left: 50%;
+            animation: popupAppear 0.5s ease forwards;
+        }
+        
+        #popup-content img {
+            top: 50%;
+            left: 50%;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 30px;
+            position: absolute;
+            animation: popupAppear 0.5s ease forwards;
+        }
+        
+        #popup-content:before {
+            content: ""; /* Added this */
+            background: linear-gradient(    
+            45deg,
+            #ff0000,
+            #ff7300,
+            #fffb00,
+            #48ff00,
+            #00ffd5,
+            #002bff,
+            #7a00ff,
+            #ff00c8,
+            #ff0000
+            );
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(15px);
+            width: 100%; /* Use custom properties */
+            height: 100%; /* Use custom properties */
+            animation: glowing-button-85 20s linear infinite;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 30px;
+        }
+        
+        @media (max-width: 600px) {
+            #popup-content {
+                width: 70%; /* Adjust width for small screens */
+            }
+        }
+        
+        
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes popupAppear {
+            from { 
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            to { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes glowing-button-85 {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 400% 0;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+        
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 0px; /* Espaço entre #word e #revealButton */
+        }
+        
+        /* Keyframes for the animations */
+        @keyframes fadeInZoom {
+            0% { opacity: 0; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes imageAppear {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        
         @keyframes colorChange {
             0% { background-color: #78bb7a; }
             50% { background-color: #99f19c; }
             100% { background-color: #78bb7a; }
         }
-
+        
         @keyframes backgroundChange {
             0% { background-color: #ffedd7; } /* Azul claro */
             50% { background-color: #ffebcd; } /* Cor de fundo intermediária */
             100% { background-color: #ffe4e1; } /* Cor de fundo final */
         }
-
-        @-webkit-keyframes squareToCircle {
-    0% {
-      border-radius: 30px 20px 20px 30px;
-    }
-    25% {
-      border-radius: 30px 20px 30px 20px;
-    }
-    50% {
-      border-radius: 20px 30px 30px 20px;
-    }
-    75% {
-      border-radius: 20px 20px 30px 30px;
-    }
-    100% {
-      border-radius: 30px 20px 20px 30px;
-    }
-
-}
-
-
-
-#revealButton {
-    padding: 1px 1px; /* Ajuste o valor conforme necessário */
-    border: none;
-    border-radius: 30px;
-    outline: none;
-    color: rgb(0, 0, 0);
-    background: #ffffff00;
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-
-}
-
-#revealButton:before {
-    content: "";
-    background: linear-gradient(
-        45deg,
-        #44ff00,
-        #b3ff50,
-        #e9fe6f,
-        #f3ff94,
-        #b3f069,
-        #72ed46,
-        #b1fc24,
-        #dcff18,
-        #44ff00
-    );
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -43%); /* Centers the glow */
-    background-size: 400%;
-    z-index: -1;
-    filter: blur(15px); /* Increase blur for a stronger glow */
-    width: calc(100% + 15px); /* Larger glow area */
-    height: calc(100% + 15px); /* Larger glow area */
-    animation: glowing-button-85 20s linear infinite;
-    transition: opacity 0.3s ease-in-out;
-    border-radius: 30px;
-}
-
-@keyframes glowing-button-85 {
-  0% {
-    background-position: 0 0;
-  }
-  50% {
-    background-position: 400% 0;
-  }
-  100% {
-    background-position: 0 0;
-  }
-}
-
-#revealButton:after {
-  z-index: -1;
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #ffffff;
-  border: 2px solid #ffffff;
-  left: 0;
-  top: 0;
-  border-radius: 30px;
-}
-@media (max-width: 600px) {
-    #revealButton.clicked:before {
-        background: linear-gradient(    
-        45deg,
-        #ff0000,
-        #ff7300,
-        #fffb00,
-        #48ff00,
-        #00ffd5,
-        #002bff,
-        #7a00ff,
-        #ff00c8,
-        #ff0000); /* Alteração de cor no hover */
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -43%); /* Centers the glow */
-        background-size: 400%;
-        z-index: -1;
-        filter: blur(15px); /* Increase blur for a stronger glow */
-        width: calc(100% + 15px); /* Larger glow area */
-        height: calc(100% + 15px); /* Larger glow area */
-        animation: glowing-button-85 20s linear infinite;
-        transition: opacity 0.3s ease-in-out;
-        border-radius: 30px;
-    }
-}
-
-#revealButton:hover:before {
-    background: linear-gradient(    
-    45deg,
-    #ff0000,
-    #ff7300,
-    #fffb00,
-    #48ff00,
-    #00ffd5,
-    #002bff,
-    #7a00ff,
-    #ff00c8,
-    #ff0000); /* Alteração de cor no hover */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -43%); /* Centers the glow */
-    background-size: 400%;
-    z-index: -1;
-    filter: blur(15px); /* Increase blur for a stronger glow */
-    width: calc(100% + 15px); /* Larger glow area */
-    height: calc(100% + 15px); /* Larger glow area */
-    animation: glowing-button-85 20s linear infinite;
-    transition: opacity 0.3s ease-in-out;
-    border-radius: 30px;
-}
-
-#giftImage {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999;
-    background-color: rgba(0, 0, 0, 0);
-    animation: fadeInZoom 2s ease forwards;
-}
-
-#giftImage img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
-    opacity: 0;
-    background-color: rgba(0, 0, 0, 0);
-    animation: imageAppear 2s ease forwards;
-    
-}
-
-#container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    gap: 0px; /* Espaço entre #word e #revealButton */
-}
-
-/* Keyframes for the animations */
-@keyframes fadeInZoom {
-    0% { opacity: 0; transform: scale(1); }
-    100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes imageAppear {
-    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-}
-
-
-
+        
+        
+        
     </style>
 </head>
 <body>
@@ -322,11 +384,13 @@
         </div>
     </div>
     <div id="message"></div>
-    <div id="giftImage" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 999; background-color: rgba(0, 0, 0, 0.8);">
-        <img src="Lisboa.png" alt="Seu Presente" style="max-width: 100%; max-height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" />
+    <div id="giftImage">
+        <div id="popup-content">
+            <img src="Lisboa.png" alt="" />
+        </div>
     </div>
     <audio id="backgroundMusic" src="proxima_viagem.mp3" preload="auto"></audio>
-
+    
     <script>
         // Declare audio variable globally
         const audioElement = document.getElementById("backgroundMusic");
@@ -340,30 +404,32 @@
             });
             audioElement.pause();
         });
-    
+        
         const phrase = "A próxima viagem";
-
+        //const phrase = "";
+        
+        
         let displayedWord = phrase.replace(/[a-zA-Záéíóúãõâêîôûàèìòùäëïöüçñ]/gi, "_");
         const wordElement = document.getElementById("word");
         const messageElement = document.getElementById("message");
-    
+        
         function updateDisplay() {
             wordElement.innerHTML = displayedWord.split("").map(char => char === " " ? "&nbsp;&nbsp;&nbsp;&nbsp;" : char).join("");
         }
-    
+        
         function guessLetter() {
             const input = document.getElementById("letterInput");
             let letter = input.value.toLowerCase();
             input.value = ""; // Clear the input field
-    
+            
             if (letter === "o" || letter === "ó") {
                 letter = "o";
             }
-    
+            
             if (letter.length === 1) {
                 let found = false;
                 let newDisplayedWord = "";
-    
+                
                 for (let i = 0; i < phrase.length; i++) {
                     const phraseLetter = phrase[i].toLowerCase() === "ó" ? "o" : phrase[i].toLowerCase();
                     if (phraseLetter === letter) {
@@ -375,9 +441,9 @@
                         newDisplayedWord += displayedWord[i]; // Keep already guessed letters
                     }
                 }
-    
+                
                 displayedWord = newDisplayedWord;
-    
+                
                 if (found) {
                     input.placeholder = "Continua!";
                 } else {
@@ -386,13 +452,13 @@
             } else {
                 input.placeholder = "Não é uma letra.";
             }
-    
+            
             updateDisplay();
-    
+            
             if (!displayedWord.includes("_")) {
                 input.value = ""; // Clear input box if the word is complete
                 const revealButton = document.getElementById("revealButton");
-    
+                
                 revealButton.style.display = "block"; // Show the button
                 audioElement.currentTime = 178; // Adjust the timestamp as needed
                 audioElement.play(); // Play the audio
@@ -401,41 +467,41 @@
                 guessButton.style.display = "none";
             }
         }
-    
-        function revealGift() {
-        const revealButton = document.getElementById("revealButton");
         
-        // Check if the device is mobile (screen width <= 600px)
-        if (window.innerWidth <= 600) {
-            // Add the clicked class to change the background
-            revealButton.classList.add("clicked");
+        function revealGift() {
+            const revealButton = document.getElementById("revealButton");
             
-            // Wait 1 second before showing the image
-            setTimeout(() => {
+            // Check if the device is mobile (screen width <= 600px)
+            if (window.innerWidth <= 600) {
+                // Add the clicked class to change the background
+                revealButton.classList.add("clicked");
+                
+                // Wait 1 second before showing the image
+                setTimeout(() => {
+                    document.getElementById("giftImage").style.display = "block";
+                    document.body.classList.add("blur-background");
+                }, 600);
+            } else {
+                // On desktop, show the image immediately
                 document.getElementById("giftImage").style.display = "block";
                 document.body.classList.add("blur-background");
-            }, 600);
-        } else {
-            // On desktop, show the image immediately
-            document.getElementById("giftImage").style.display = "block";
-            document.body.classList.add("blur-background");
+            }
         }
-    }
-
+        
         // Add resize listener to handle orientation changes
         window.addEventListener('resize', () => {
             const revealButton = document.getElementById("revealButton");
-            if (window.innerWidth > 600) {
+            if (window.innerWidth > 690) {
                 revealButton.classList.remove("clicked");
             }
         });
-    
+        
         function checkEnter(event) {
             if (event.key === "Enter") {
                 guessLetter(); // Call guessLetter on Enter key press
             }
         }
-    
+        
         updateDisplay();
     </script>
 </body>
