@@ -70,9 +70,9 @@
         }
 
         #message {
-            margin-top: 20px;
+            margin-top: 0px;
             font-size: 20px;
-            color: #000000; /* Cor para mensagens de erro */
+            color: #464646; /* Cor para mensagens de erro */
         }
 
         /* Adicionando estilos responsivos */
@@ -300,88 +300,94 @@
     <div id="giftImage" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 999; background-color: rgba(0, 0, 0, 0.8);">
         <img src="Lisboa.png" alt="Seu Presente" style="max-width: 100%; max-height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" />
     </div>
+    <audio id="backgroundMusic" src="proxima_viagem.mp3" preload="auto"></audio>
 
     <script>
-
-        //const phrase = "Prepara-te para viajar"; // A primeira letra é maiúscula
+        // Declare audio variable globally
+        const audioElement = document.getElementById("backgroundMusic");
+        
+        // Preload audio when the page loads
+        window.addEventListener('load', function() {
+            // Start loading the audio file
+            audioElement.play().catch(error => {
+                // Handle the error (e.g., autoplay not allowed)
+                console.log("Audio preload failed: ", error);
+            });
+        });
+    
         const phrase = "A próxima viagem";
-        //const phrase = "r";
         let displayedWord = phrase.replace(/[a-zA-Záéíóúãõâêîôûàèìòùäëïöüçñ]/gi, "_");
         const wordElement = document.getElementById("word");
         const messageElement = document.getElementById("message");
-
+    
         function updateDisplay() {
-            // Substitui espaços por um número maior de espaços para aumentar o espaçamento entre palavras
             wordElement.innerHTML = displayedWord.split("").map(char => char === " " ? "&nbsp;&nbsp;&nbsp;&nbsp;" : char).join("");
         }
-
+    
         function guessLetter() {
-    const input = document.getElementById("letterInput");
-    let letter = input.value.toLowerCase();
-    input.value = "";
-
-    // Substitui "ó" por "o" para fazer a verificação
-    if (letter === "o" || letter === "ó") {
-        letter = "o";
-    }
-
-    if (letter.length === 1) {
-        let found = false;
-        let newDisplayedWord = "";
-
-        for (let i = 0; i < phrase.length; i++) {
-            // Aqui consideramos "ó" como "o"
-            const phraseLetter = phrase[i].toLowerCase() === "ó" ? "o" : phrase[i].toLowerCase();
-
-            if (phraseLetter === letter) {
-                newDisplayedWord += phrase[i]; // Mantém a letra original (maiúscula ou minúscula)
-                found = true;
-            } else if (phrase[i] === " ") {
-                newDisplayedWord += " "; // Mantém os espaços
+            const input = document.getElementById("letterInput");
+            let letter = input.value.toLowerCase();
+            input.value = ""; // Clear the input field
+    
+            if (letter === "o" || letter === "ó") {
+                letter = "o";
+            }
+    
+            if (letter.length === 1) {
+                let found = false;
+                let newDisplayedWord = "";
+    
+                for (let i = 0; i < phrase.length; i++) {
+                    const phraseLetter = phrase[i].toLowerCase() === "ó" ? "o" : phrase[i].toLowerCase();
+                    if (phraseLetter === letter) {
+                        newDisplayedWord += phrase[i]; // Maintain original case
+                        found = true;
+                    } else if (phrase[i] === " ") {
+                        newDisplayedWord += " "; // Keep spaces
+                    } else {
+                        newDisplayedWord += displayedWord[i]; // Keep already guessed letters
+                    }
+                }
+    
+                displayedWord = newDisplayedWord;
+    
+                if (found) {
+                    input.placeholder = "Continua!";
+                } else {
+                    input.placeholder = "Bem tentado";
+                }
             } else {
-                newDisplayedWord += displayedWord[i]; // Mantém a letra já adivinhada
+                input.placeholder = "Não é uma letra.";
+            }
+    
+            updateDisplay();
+    
+            if (!displayedWord.includes("_")) {
+                input.value = ""; // Clear input box if the word is complete
+                const revealButton = document.getElementById("revealButton");
+    
+                revealButton.style.display = "block"; // Show the button
+                audioElement.currentTime = 178; // Adjust the timestamp as needed
+                audioElement.play(); // Play the audio
+                revealButton.classList.add("visible"); // Trigger fade effect
+                input.style.display = "none";
+                guessButton.style.display = "none";
             }
         }
-
-        displayedWord = newDisplayedWord;
-        messageElement.textContent = found ? "Continua!" : "Obvio que não é a boa letra.";
-    } else {
-        messageElement.textContent = "Lol, isso não é uma letra.";
-    }
-
-    updateDisplay();
-
-    if (!displayedWord.includes("_")) {
-        messageElement.textContent = " ";
-        const revealButton = document.getElementById("revealButton");
-        const backgroundMusic = document.getElementById("backgroundMusic");
-
-        revealButton.style.display = "block"; // Ensure the button is set to block before fading in
-        backgroundMusic.currentTime = 178; // Substitua 30 pelo timestamp desejado em segundos
-        backgroundMusic.play();
-        revealButton.classList.add("visible"); // Add the visible class to trigger the fade effect
-        input.style.display = "none";
-        guessButton.style.display = "none";
-    }
-}
-
+    
         function revealGift() {
-            //alert("Aqui está o seu presente! 🎁"); // Ação ao clicar no botão
-            document.getElementById("giftImage").style.display = "block"; // Mostra a imagem
-            document.body.classList.add("blur-background"); // Apply blur to the background
-
-
+            document.getElementById("giftImage").style.display = "block"; // Show image
+            document.body.classList.add("blur-background"); // Apply blur
         }
-
+    
         function checkEnter(event) {
             if (event.key === "Enter") {
-                guessLetter(); // Chama a função guessLetter quando a tecla Enter é pressionada
+                guessLetter(); // Call guessLetter on Enter key press
             }
         }
-
+    
         updateDisplay();
     </script>
-<audio id="backgroundMusic" src="proxima_viagem.mp3" preload="auto"></audio>
 </body>
 </html>
 
