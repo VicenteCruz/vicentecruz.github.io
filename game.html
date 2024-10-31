@@ -205,8 +205,33 @@
   top: 0;
   border-radius: 30px;
 }
-
-
+@media (max-width: 600px) {
+    #revealButton.clicked:before {
+        background: linear-gradient(    
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000); /* Alteração de cor no hover */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -43%); /* Centers the glow */
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(15px); /* Increase blur for a stronger glow */
+        width: calc(100% + 15px); /* Larger glow area */
+        height: calc(100% + 15px); /* Larger glow area */
+        animation: glowing-button-85 20s linear infinite;
+        transition: opacity 0.3s ease-in-out;
+        border-radius: 30px;
+    }
+}
 
 #revealButton:hover:before {
     background: linear-gradient(    
@@ -317,6 +342,7 @@
         });
     
         const phrase = "A próxima viagem";
+
         let displayedWord = phrase.replace(/[a-zA-Záéíóúãõâêîôûàèìòùäëïöüçñ]/gi, "_");
         const wordElement = document.getElementById("word");
         const messageElement = document.getElementById("message");
@@ -377,9 +403,32 @@
         }
     
         function revealGift() {
-            document.getElementById("giftImage").style.display = "block"; // Show image
-            document.body.classList.add("blur-background"); // Apply blur
+        const revealButton = document.getElementById("revealButton");
+        
+        // Check if the device is mobile (screen width <= 600px)
+        if (window.innerWidth <= 600) {
+            // Add the clicked class to change the background
+            revealButton.classList.add("clicked");
+            
+            // Wait 1 second before showing the image
+            setTimeout(() => {
+                document.getElementById("giftImage").style.display = "block";
+                document.body.classList.add("blur-background");
+            }, 1500);
+        } else {
+            // On desktop, show the image immediately
+            document.getElementById("giftImage").style.display = "block";
+            document.body.classList.add("blur-background");
         }
+    }
+
+        // Add resize listener to handle orientation changes
+        window.addEventListener('resize', () => {
+            const revealButton = document.getElementById("revealButton");
+            if (window.innerWidth > 600) {
+                revealButton.classList.remove("clicked");
+            }
+        });
     
         function checkEnter(event) {
             if (event.key === "Enter") {
