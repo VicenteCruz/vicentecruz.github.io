@@ -313,6 +313,7 @@
                 // Handle the error (e.g., autoplay not allowed)
                 console.log("Audio preload failed: ", error);
             });
+            audioElement.pause();
         });
     
         const phrase = "A próxima viagem";
