@@ -29,6 +29,7 @@
             background-color: #ffffff;
             text-align: center; /* Center the text */
             white-space: pre-wrap; /* Allow wrapping of words */
+            -webkit-animation: squareToCircle 2s 1s infinite alternate;
         }
         #letterInput {
             font-size: 24px;
@@ -98,10 +99,28 @@
         }
 
         @keyframes backgroundChange {
-            0% { background-color: #f5fff0; } /* Azul claro */
+            0% { background-color: #ffedd7; } /* Azul claro */
             50% { background-color: #ffebcd; } /* Cor de fundo intermediária */
             100% { background-color: #ffe4e1; } /* Cor de fundo final */
         }
+
+        @-webkit-keyframes squareToCircle {
+    0% {
+      border-radius: 30px 20px 20px 30px;
+    }
+    25% {
+      border-radius: 30px 20px 30px 20px;
+    }
+    50% {
+      border-radius: 20px 30px 30px 20px;
+    }
+    75% {
+      border-radius: 20px 20px 30px 30px;
+    }
+    100% {
+      border-radius: 30px 20px 20px 30px;
+    }
+}
     </style>
 </head>
 <body>
@@ -121,7 +140,7 @@
 
     <script>
         //const phrase = "Prepara-te para viajar"; // A primeira letra é maiúscula
-        const phrase = "Prepara-te \n para viajar";
+        const phrase = "Prepara-te\npara viajar";
         let displayedWord = phrase.replace(/[a-zA-Z]/g, "_");
         const wordElement = document.getElementById("word");
         const messageElement = document.getElementById("message");

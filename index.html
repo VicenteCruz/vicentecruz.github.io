@@ -21,29 +21,37 @@
 
         h1 {
             font-size: 3em;
-            margin-bottom: 20px;
+            margin-bottom: -30px;
             color: #000000; /* Verde */
             z-index: 1; /* Coloca o texto acima das bolas */
+            animation: moveUp 1s forwards;
+            animation-delay: 1s;
         }
 
         p {
-            font-size: 1.5em;
-            margin-top: 10px;
             z-index: 1; /* Coloca o texto acima das bolas */
+
+            opacity: 0; /* Start with the paragraph hidden */
+            transition: opacity 1s; /* Smooth transition for opacity change */
+            animation: fadeInButton 1s forwards; /* Fade-in animation for the paragraph */
+            animation-delay: 1.5s; /* Delay the animation by 1 second */
         }
 
         a {
+            font-size: 1.3em;
             text-decoration: none;
             color: white;
             background-color: #78bb7a; /* Verde */
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 15px 25px;
+            border-radius: 80px;
             transition: background-color 0.3s;
-            z-index: 1; /* Coloca o texto acima das bolas */
+            display: inline-block;
         }
 
         a:hover {
-            background-color: #45a049; /* Verde mais escuro ao passar o mouse */
+            background-color: #cfffd0; /* Verde mais escuro ao passar o mouse */
+            color: rgb(0, 0, 0);
+            animation: shake 0.2s infinite;
         }
 
         .ball {
@@ -63,6 +71,31 @@
                 transform: translateY(-110vh); /* Sobe até 10% acima da altura da tela */
             }
         }
+
+            /* Animação para o container aparecer */
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+
+    /* Animação para mover o título para cima */
+    @keyframes moveUp {
+        from { transform: translateY(0); }
+        to { transform: translateY(-30px); }
+    }
+
+    /* Animação para aparecer o botão */
+    @keyframes fadeInButton {
+        to { opacity: 1; }
+    }
+
+    @keyframes shake {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        25% { transform: translate(5px, 5px) rotate(5deg); }
+        50% { transform: translate(0, 0) rotate(0eg); }
+        75% { transform: translate(-5px, 5px) rotate(-5deg); }
+        100% { transform: translate(0, 0) rotate(0deg); }
+    }
+    
     </style>
 </head>
 <body>
