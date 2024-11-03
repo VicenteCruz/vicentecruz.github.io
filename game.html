@@ -232,7 +232,7 @@
             filter: blur(15px); /* Increase blur for a stronger glow */
             width: calc(100% + 15px); /* Larger glow area */
             height: calc(100% + 15px); /* Larger glow area */
-            animation: glowing-button-85 20s linear infinite;
+            animation: glowing-button-85 7s linear infinite;
             transition: opacity 0.3s ease-in-out;
             border-radius: 30px;
         }
@@ -294,7 +294,7 @@
             filter: blur(15px);
             width: 100%; /* Use custom properties */
             height: 100%; /* Use custom properties */
-            animation: glowing-button-85 20s linear infinite;
+            animation: glowing-button-85 10s linear infinite;
             transition: opacity 0.3s ease-in-out;
             border-radius: 30px;
         }
@@ -326,11 +326,12 @@
                 background-position: 0 0;
             }
             50% {
-                background-position: 400% 0;
+                background-position: 100% 0%;
             }
             100% {
-                background-position: 0 0;
+                background-position: 0% 0%;
             }
+            
         }
         
         #container {
@@ -403,8 +404,8 @@
             audioElement.pause();
         });
         
-        const phrase = "A próxima viagem";
-        //const phrase = "";
+        //const phrase = "A próxima viagem";
+        const phrase = "";
         
         
         let displayedWord = phrase.replace(/[a-zA-Záéíóúãõâêîôûàèìòùäëïöüçñ]/gi, "_");
@@ -504,4 +505,3 @@
     </script>
 </body>
 </html>
-
